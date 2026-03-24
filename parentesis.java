@@ -1,6 +1,6 @@
 import java.util.Scanner; // importo el escanner para poder usarlo
 
-public class parenteses{
+public class parentesis  {
     public static void main(String[] args) {
         int tope = -1; // declaro e inicializo el tope en -1 para indicar que la pila está vacía
         Scanner in = new Scanner(System.in); // declaro el escaner para leer la entrada del usuario
