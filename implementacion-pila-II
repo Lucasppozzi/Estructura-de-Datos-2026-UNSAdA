@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+// Clase principal: debe llamarse Main y ser pública para que Codeforces la pueda aceptar
+public class Main {
+    public static void main(String[] args) {
+        // Usamos Scanner para leer la entrada estándar (lo que Codeforces nos da como input)
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt(); // número de operaciones a procesar
+        Pila pila = new Pila(N); // creamos nuestra pila con capacidad máxima N
+
+        // Procesamos cada operación
+        for (int i = 0; i < N; i++) {
+            String op = sc.next(); // leemos el nombre de la operación
+
+            switch (op) {
+                case "PUSH":
+                    int x = sc.nextInt(); // leemos el valor a apilar
+                    pila.push(x);         // lo agregamos al tope de la pila
+                    break;
+
+                case "POP":
+                    pila.pop();           // eliminamos el último elemento
+                    break;
+
+                case "TOP":
+                    System.out.println(pila.top()); // mostramos el último elemento
+                    break;
+
+                case "EMPTY":
+                    // imprimimos 1 si está vacía, 0 si no
+                    System.out.println(pila.empty() ? 1 : 0);
+                    break;
+
+                case "SIZE":
+                    System.out.println(pila.size()); // mostramos la cantidad de elementos
+                    break;
+            }
+        }
+        sc.close(); // cerramos el Scanner
+    }
+}
+
+// Implementación propia del TAD Pila
+class Pila {
+    // Ocultamiento: los atributos son privados, el usuario no accede directamente
+    private int[] datos; // arreglo donde guardamos los elementos
+    private int tope;    // índice del último elemento (tope de la pila)
+
+    // Constructor: crea la pila vacía
+    public Pila(int capacidad) {
+        datos = new int[capacidad]; // inicializamos el arreglo con la capacidad máxima
+        tope = -1;                  // protección: -1 indica que la pila está vacía
+    }
+
+    // Operación push: agrega un elemento al tope
+    public void push(int x) {
+        datos[++tope] = x; // incrementamos tope y guardamos el valor
+    }
+
+    // Operación pop: elimina el elemento del tope
+    public void pop() {
+        tope--; // decrementamos tope (precondición: la pila no está vacía)
+    }
+
+    // Operación top: consulta el último elemento sin eliminarlo
+    public int top() {
+        return datos[tope]; // devolvemos el valor en la posición tope
+    }
+
+    // Operación empty: devuelve true si está vacía
+    public boolean empty() {
+        return tope == -1; // si tope es -1, no hay elementos
+    }
+
+    // Operación size: devuelve la cantidad de elementos
+    public int size() {
+        return tope + 1; // el tamaño es tope + 1
+    }
+}
