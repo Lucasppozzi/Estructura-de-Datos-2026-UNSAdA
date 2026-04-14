@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine(); // leemos la cadena completa
+        sc.close();
+
+        // Creamos la pila con capacidad igual a la longitud de la cadena
+        Pila pila = new Pila(s.length());
+
+        boolean valido = true; // asumimos que es válido hasta encontrar un error
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            // Si es un carácter de apertura, lo apilamos
+            if (c == '(' || c == '[' || c == '{') {
+                pila.push(c);
+            }
+            // Si es un carácter de cierre, verificamos que coincida con el tope
+            else {
+                if (pila.empty()) {
+                    valido = false; // no hay apertura correspondiente
+                    break;
+                }
+                char top = (char) pila.top();
+                pila.pop();
+
+                if ((c == ')' && top != '(') ||
+                    (c == ']' && top != '[') ||
+                    (c == '}' && top != '{')) {
+                    valido = false; // cierre no coincide con apertura
+                    break;
+                }
+            }
+        }
+
+        // Al final, la pila debe quedar vacía para que sea válido
+        if (!pila.empty()) {
+            valido = false;
+        }
+
+        // Imprimimos el resultado
+        System.out.println(valido ? "Si" : "No");
+    }
+}
+
+// Implementación propia del TAD Pila
+class Pila {
+    private int[] datos; // arreglo para almacenar caracteres
+    private int tope;    // índice del último elemento
+
+    public Pila(int capacidad) {
+        datos = new int[capacidad];
+        tope = -1;
+    }
+
+    public void push(int x) {
+        datos[++tope] = x;
+    }
+
+    public void pop() {
+        tope--;
+    }
+
+    public int top() {
+        return datos[tope];
+    }
+
+    public boolean empty() {
+        return tope == -1;
+    }
+
+    public int size() {
+        return tope + 1;
+    }
+}
