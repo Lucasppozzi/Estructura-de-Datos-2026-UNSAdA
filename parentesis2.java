@@ -64,3 +64,4 @@ public class parentesis2 {
     public static int POP(int tope) {
         return tope - 1;
     }
+}

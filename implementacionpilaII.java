@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-// Clase principal: debe llamarse Main y ser pública para que Codeforces la pueda aceptar
-public class Main {
+public class implementacionpilaII {
     public static void main(String[] args) {
         // Usamos Scanner para leer la entrada estándar (lo que Codeforces nos da como input)
         Scanner sc = new Scanner(System.in);
