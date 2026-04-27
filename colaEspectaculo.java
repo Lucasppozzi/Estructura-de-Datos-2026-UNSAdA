@@ -23,12 +23,13 @@ public class colaEspectaculo {
         // Simular atención
         while (!cola.empty()) {
             Persona actual = cola.top();
-            if (tiempoTotal + actual.minutos >= 120) { // antes era >
-                break;
-            }
-            tiempoTotal += actual.minutos;
+            tiempoTotal += actual.minutos;   // se atiende primero
             cola.pop();
             atendidos++;
+            
+            if (tiempoTotal >= 120) {        // y recién después se corta
+                break;
+            }
         }
         
         int noAtendidos = N - atendidos;
