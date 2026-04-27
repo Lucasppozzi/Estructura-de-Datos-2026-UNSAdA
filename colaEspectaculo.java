@@ -23,7 +23,7 @@ public class colaEspectaculo {
         // Simular atención
         while (!cola.empty()) {
             Persona actual = cola.top();
-            if (tiempoTotal + actual.minutos > 120) {
+            if (tiempoTotal + actual.minutos >= 120) { // antes era >
                 break;
             }
             tiempoTotal += actual.minutos;
