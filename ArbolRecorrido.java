@@ -38,10 +38,21 @@ public class ArbolRecorrido {
         leerPadres(arbol, N, input);
         arbol.ordenarHijos();
 
+        // Ejecutar los recorridos empezando desde la raíz (nodo 1)
         ArrayList<Integer> listaPre = new ArrayList<>();
         ArrayList<Integer> listaIn = new ArrayList<>();
         ArrayList<Integer> listaPost = new ArrayList<>();
         ArrayList<Integer> listaNiveles = new ArrayList<>();
+        arbol.preOrden(1, listaPre);
+        arbol.inOrden(1, listaIn);
+        arbol.postorden(1, listaPost);
+        arbol.porNiveles(1, listaNiveles);
+
+// Imprimir los resultados en consola
+        imprimirLista(listaPre);
+        imprimirLista(listaIn);
+        imprimirLista(listaPost);
+        imprimirLista(listaNiveles);;
     }
     public static void leerPadres(Arbol arbol, int N, Scanner input){
         for(int i=2; i<=N; i++){
@@ -91,7 +102,9 @@ class Arbol{
     public void inOrden(int nodo, ArrayList<Integer> lista){
         if (hijos[nodo].size() > 0) {
             inOrden(hijos[nodo].get(0), lista); // Visitar el primer hijo
+
         }
+        lista.add(nodo); //procesar la raiz después de visitar el primer hijo
         for (int hijo : hijos[nodo]) {
             if (hijo != hijos[nodo].get(0)) { // Evitar visitar el primer hijo nuevamente
                 inOrden(hijo, lista); // Llamada recursiva para los demás hijos
@@ -107,7 +120,7 @@ class Arbol{
         
     }
      public void porNiveles(int raiz, ArrayList<Integer> lista){
-        Queue<Integer> cola = new LinkedList<>();
+        Queue<Integer> cola = new ArrayDeque<>();
         cola.add(raiz);
         while (!cola.isEmpty()) {
             int nodoActual = cola.poll();
